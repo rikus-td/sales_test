@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI Component Reference</title>
+    <title>Proposal: Proposals as Code Implementation Guide</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="gate">
-        <div class="card centered" style="max-width: 450px;">
-            <div class="agent-tag">System Access</div>
-            <h2>UI Reference</h2>
-            <p>コンポーネント・リファレンスへようこそ。<br>認証用メールアドレスを入力してください。</p>
+        <div class="card centered" style="max-width: 480px;">
+            <div class="agent-tag">Security Protocol</div>
+            <h2>Client Access Only</h2>
+            <p>本提案（兼 実装ガイド）を閲覧するには、<br>承認済みメールアドレスを入力してください。</p>
             <div class="input-group">
                 <input type="email" id="emailInput" placeholder="info@rikus.me">
-                <button onclick="checkAccess()">マニュアルを開く</button>
+                <button onclick="checkAccess()">認証して入室する</button>
             </div>
-            <p id="errorMessage" class="error">アクセス権限がありません。</p>
+            <p id="errorMessage" class="error">アクセス権限が確認できません。</p>
         </div>
     </div>
 
@@ -26,36 +26,29 @@
 
         <section class="slide">
             <div class="slide-content centered">
-                <div class="reveal section-label">Design System v1.0</div>
-                <h1 class="reveal text-gradient">UI Component<br>Reference</h1>
-                <p class="reveal">HTML構築のためのクラス名・構造マニュアル</p>
-                <div class="reveal" style="margin-top: 2rem;">
-                    <p class="text-dim">Scroll to start</p>
+                <div class="reveal section-label">Proposal for Sales Innovation</div>
+                <h1 class="reveal text-gradient">Proposals as Code<br>実装・記述ガイド</h1>
+                <p class="reveal">「資料をコードで書く」ことで営業はどう変わるか</p>
+                <div class="reveal" style="margin-top: 3rem;">
+                    <p id="userDisplay" class="text-dim"></p>
                 </div>
             </div>
         </section>
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">01. Base Structure</div>
-                <h2 class="reveal">スライドの基本構造 (<code>.slide</code>)</h2>
+                <div class="reveal section-label">01. Structure</div>
+                <h2 class="reveal">スライド構造の定義</h2>
                 <div class="grid-2 reveal">
                     <div>
-                        <p>1つのページ（画面）は必ず <code>&lt;section class="slide"&gt;</code> で囲みます。その中にコンテンツ幅を制御する <code>.slide-content</code> を配置します。</p>
-                        <p style="margin-top: 1rem;">中央揃えにしたい場合は <code>.centered</code> クラスを併用します。</p>
+                        <h3><code>.slide</code> クラス</h3>
+                        <p>各スライドは <code>&lt;section class="slide"&gt;</code> で定義します。これが「1ページ」の単位になります。</p>
+                        <p style="margin-top: 1rem;">背景色はCSSで一括管理され、スクロールスナップによって「ピタッ」と止まるよう設計されています。</p>
                     </div>
                     <div class="code-block">
-<pre><code>&lt;!-- 基本のスライド --&gt;
-&lt;section class="slide"&gt;
+<pre><code>&lt;section class="slide"&gt;
   &lt;div class="slide-content"&gt;
-    &lt;!-- ここに中身 --&gt;
-  &lt;/div&gt;
-&lt;/section&gt;
-
-&lt;!-- 中央揃えのスライド --&gt;
-&lt;section class="slide"&gt;
-  &lt;div class="slide-content centered"&gt;
-    &lt;!-- ここに中身 --&gt;
+    &lt;!-- コンテンツ --&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
                     </div>
@@ -66,23 +59,20 @@
         <section class="slide">
             <div class="slide-content">
                 <div class="reveal section-label">02. Typography</div>
-                <h2 class="reveal">見出しとテキスト (<code>h1, h2, p</code>)</h2>
-                <div class="grid-2 reveal">
-                    <div>
-                        <div class="section-label" style="margin-bottom: 0.5rem;">.section-label</div>
-                        <h1 class="text-gradient">h1.text-gradient</h1>
-                        <h2>h2: 通常の見出し</h2>
-                        <h3>h3: 小見出し（自動でシアン色）</h3>
-                        <p>p: 通常の段落テキストです。文字色は自動で少し暗くなります。</p>
-                        <p class="text-dim">p.text-dim: 補足用のさらに暗いテキストです。</p>
+                <h2 class="reveal">視覚的階層とクラス名</h2>
+                <div class="grid-3 reveal">
+                    <div class="card">
+                        <div class="section-label" style="margin-bottom:0.5rem">Label</div>
+                        <h3><code>.section-label</code></h3>
+                        <p>セクションの冒頭に配置する、強調された小さなテキストです。</p>
                     </div>
-                    <div class="code-block">
-<pre><code>&lt;div class="section-label"&gt;タグ&lt;/div&gt;
-&lt;h1 class="text-gradient"&gt;大見出し&lt;/h1&gt;
-&lt;h2&gt;セクション見出し&lt;/h2&gt;
-&lt;h3&gt;小見出し&lt;/h3&gt;
-&lt;p&gt;本文テキスト&lt;/p&gt;
-&lt;p class="text-dim"&gt;補足テキスト&lt;/p&gt;</code></pre>
+                    <div class="card">
+                        <h3 class="text-gradient"><code>.text-gradient</code></h3>
+                        <p>H1などに使用し、資料全体の「未来感」を演出するグラデーションです。</p>
+                    </div>
+                    <div class="card">
+                        <h3><code>h3</code> (Auto Color)</h3>
+                        <p>H3タグはCSSにより自動的にシアン（アクセントカラー）で着色されます。</p>
                     </div>
                 </div>
             </div>
@@ -91,72 +81,42 @@
         <section class="slide">
             <div class="slide-content">
                 <div class="reveal section-label">03. Layout</div>
-                <h2 class="reveal">グリッドシステム (<code>.grid-2, .grid-3</code>)</h2>
-                
-                <h3 class="reveal">2カラム (<code>.grid-2</code>)</h3>
-                <div class="grid-2 reveal" style="margin-bottom: 2rem;">
-                    <div class="card" style="padding: 1rem; text-align: center;">Left Column</div>
-                    <div class="card" style="padding: 1rem; text-align: center;">Right Column</div>
-                </div>
-
-                <h3 class="reveal">3カラム (<code>.grid-3</code>)</h3>
-                <div class="grid-3 reveal">
-                    <div class="card" style="padding: 1rem; text-align: center;">Col 1</div>
-                    <div class="card" style="padding: 1rem; text-align: center;">Col 2</div>
-                    <div class="card" style="padding: 1rem; text-align: center;">Col 3</div>
-                </div>
-                
-                <div class="code-block reveal" style="margin-top: 1.5rem;">
-<pre><code>&lt;div class="grid-2"&gt;
-  &lt;div&gt;左&lt;/div&gt;
-  &lt;div&gt;右&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <div class="slide-content">
-                <div class="reveal section-label">04. Components</div>
-                <h2 class="reveal">カード (<code>.card</code>)</h2>
+                <h2 class="reveal">グリッドシステムの使い方</h2>
                 <div class="grid-2 reveal">
                     <div class="card">
-                        <h3>基本のカード</h3>
-                        <p>情報をグループ化する際に使用します。背景のぼかし（backdrop-filter）とボーダーが自動で適用されます。</p>
+                        <h3><code>.grid-2</code></h3>
+                        <p>左右2分割のレイアウト。左に説明、右に図解やコードを置くのに適しています。</p>
                     </div>
-                    <div class="code-block">
-<pre><code>&lt;div class="card"&gt;
-  &lt;h3&gt;タイトル&lt;/h3&gt;
-  &lt;p&gt;カードの説明文を記述します。&lt;/p&gt;
+                    <div class="card">
+                        <h3><code>.grid-3</code></h3>
+                        <p>3カラム構成。特徴の羅列や、比較表などに使用します。</p>
+                    </div>
+                </div>
+                <div class="code-block reveal" style="margin-top:2rem">
+<pre><code>&lt;div class="grid-2"&gt;
+  &lt;div&gt;左側の要素&lt;/div&gt;
+  &lt;div&gt;右側の要素&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-                    </div>
                 </div>
             </div>
         </section>
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">05. Components</div>
-                <h2 class="reveal">タグとモックアップUI</h2>
+                <div class="reveal section-label">04. Advanced UI</div>
+                <h2 class="reveal">対話モックアップとタグ</h2>
                 <div class="grid-2 reveal">
                     <div>
-                        <span class="agent-tag">New Feature</span>
-                        <p style="margin-bottom: 1rem;"><code>.agent-tag</code> は強調したいラベルに使います。</p>
-                        
+                        <span class="agent-tag">Example Tag</span>
                         <div class="mockup-ui">
-                            <div class="text-dim">> System Status</div>
-                            <div class="ai-response">All systems operational.</div>
+                            <div class="text-dim">> AIへの指示</div>
+                            <div class="ai-response">「この論点をHTMLに変換して」</div>
                         </div>
                     </div>
-                    <div class="code-block">
-<pre><code>&lt;!-- タグ --&gt;
-&lt;span class="agent-tag"&gt;タグ名&lt;/span&gt;
-
-&lt;!-- モックアップUI --&gt;
-&lt;div class="mockup-ui"&gt;
-  &lt;div class="text-dim"&gt;&gt; 入力&lt;/div&gt;
-  &lt;div class="ai-response"&gt;出力結果&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+                    <div class="card">
+                        <h3><code>.mockup-ui</code></h3>
+                        <p>AIとの対話や、システムの実行結果をリアルに表現するためのコンポーネントです。</p>
+                        <p style="margin-top: 1rem;"><code>.ai-response</code> クラスで、AIの回答に枠線を付けられます。</p>
                     </div>
                 </div>
             </div>
@@ -164,18 +124,25 @@
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">06. Animation</div>
-                <h2 class="reveal">フェードイン (<code>.reveal</code>)</h2>
-                <div class="grid-2 reveal">
-                    <div>
-                        <p>スクロール時に要素をフワッと表示させたい場合は、任意のタグに <code>reveal</code> クラスを追加します。</p>
-                        <p>1つのスライド内で複数の <code>reveal</code> がある場合、自動的に遅延（ディレイ）がかかり、順番に表示されます。</p>
-                    </div>
-                    <div class="code-block">
-<pre><code>&lt;!-- H2が先に表示され、Pが遅れて表示される --&gt;
-&lt;h2 class="reveal"&gt;見出し&lt;/h2&gt;
-&lt;p class="reveal"&gt;本文&lt;/p&gt;</code></pre>
-                    </div>
+                <div class="reveal section-label">05. Animation</div>
+                <h2 class="reveal">スクロール・リビール</h2>
+                <div class="card reveal">
+                    <h3><code>.reveal</code> クラスの付与</h3>
+                    <p>要素が画面内に入った時にフワッと浮かび上がる演出です。HTML要素に <code>reveal</code> を書くだけで、JSが自動的にタイミングを計算して順番に表示させます。</p>
+                </div>
+                <div class="code-block reveal" style="margin-top:2rem">
+<pre><code>&lt;h2 class="reveal"&gt;遅れて表示される見出し&lt;/h2&gt;
+&lt;p class="reveal"&gt;その後に表示される文章&lt;/p&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide centered">
+            <div class="slide-content centered">
+                <h1 class="reveal text-gradient">Start Building</h1>
+                <p class="reveal">このガイド自体が、あなたの最初の「コードによる提案書」の雛形です。</p>
+                <div class="reveal" style="margin-top: 4rem;">
+                    <p class="text-dim">Implementation Complete | Powered by ThinkingAI</p>
                 </div>
             </div>
         </section>
