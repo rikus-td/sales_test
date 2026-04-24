@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Guide: Proposals as Code Framework</title>
+    <title>Mega Guide: Proposals as Code Framework</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
             /* ThinkingAI Light Theme Colors */
             --ta-bg: #ffffff;
-            --ta-bg-alt: #f8fafc; /* 偶数スライド用の非常に薄いグレー */
+            --ta-bg-alt: #f8fafc;
             --ta-blue: #2563eb;
             --ta-cyan: #0ea5e9;
             --ta-navy: #0f172a;
@@ -23,7 +23,6 @@
 
         body {
             background-color: var(--ta-bg);
-            /* 📐 グリッド線の描画（白背景に薄いグレー） */
             background-image: 
                 linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
@@ -31,13 +30,13 @@
             color: var(--ta-navy);
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
             overflow-x: hidden;
-            scroll-snap-type: y mandatory; /* スルスル止まるスナップ */
+            scroll-snap-type: y mandatory;
         }
 
-        /* 🌟 マウス追従の柔らかな光 */
+        /* 🌟 マウス追従の光 */
         #mouse-glow {
             position: fixed; inset: 0;
-            background: radial-gradient(circle 500px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(37, 99, 235, 0.05), transparent 80%);
+            background: radial-gradient(circle 500px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(37, 99, 235, 0.06), transparent 80%);
             z-index: 0; pointer-events: none;
         }
 
@@ -50,10 +49,7 @@
             position: relative; z-index: 1;
             border-bottom: 1px solid var(--ta-border);
         }
-
-        /* 🌗 偶数ページをうっすらグレーにして区切りを出す */
         .slide:nth-child(even) { background-color: var(--ta-bg-alt); }
-
         .slide-content { max-width: 1200px; margin: 0 auto; width: 100%; }
 
         /* Typography */
@@ -63,29 +59,27 @@
         p { font-size: 1.1rem; line-height: 1.8; color: var(--ta-slate); }
         .text-gradient { background: var(--ta-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .section-label { font-size: 0.75rem; font-weight: 900; letter-spacing: 0.4em; text-transform: uppercase; color: var(--ta-blue); margin-bottom: 2rem; border-left: 4px solid var(--ta-blue); padding-left: 1.5rem; }
+        .text-dim { font-size: 0.95rem; color: var(--ta-slate); }
 
-        /* 💎 メッセージライン専用クラス */
-        .message-area { margin-bottom: 3.5rem; border-bottom: 1px solid var(--ta-border); padding-bottom: 2.5rem; }
-        .main-message { font-size: 2.5rem; font-weight: 800; line-height: 1.3; color: var(--ta-navy); margin-bottom: 0.8rem; }
-        .sub-message { font-size: 1.2rem; font-weight: 400; color: var(--ta-slate); line-height: 1.6; }
+        /* 💎 メッセージライン */
+        .message-area { margin-bottom: 3.5rem; border-bottom: 1px solid var(--ta-border); padding-bottom: 2rem; }
+        .main-message { font-size: 2.2rem; font-weight: 800; line-height: 1.3; color: var(--ta-navy); margin-bottom: 0.8rem; }
+        .sub-message { font-size: 1.1rem; font-weight: 400; color: var(--ta-slate); line-height: 1.6; max-width: 900px; }
 
-        /* 📊 比較テーブル */
+        /* 📊 比較テーブル & リスト */
         .table-container { background: white; border-radius: 20px; border: 1px solid var(--ta-border); overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.03); margin-top: 1rem; }
         .comp-table { width: 100%; border-collapse: collapse; }
         .comp-table th { background: #f8fafc; padding: 1.5rem; text-align: left; font-size: 0.8rem; color: var(--ta-slate); text-transform: uppercase; border-bottom: 2px solid var(--ta-border); }
         .comp-table td { padding: 1.5rem; border-bottom: 1px solid var(--ta-border); font-size: 1.05rem; color: var(--ta-navy); }
         .comp-table tr:last-child td { border-bottom: none; }
-        .comp-table .highlight-col { background: rgba(37, 99, 235, 0.02); font-weight: 700; color: var(--ta-blue); }
+        .comp-table .highlight-col { background: rgba(37, 99, 235, 0.03); font-weight: 700; color: var(--ta-blue); }
+        
+        .custom-list { list-style: none; padding: 0; margin-top: 1rem; }
+        .custom-list li { position: relative; padding-left: 1.8rem; margin-bottom: 0.8rem; color: var(--ta-navy); font-weight: 500; }
+        .custom-list li::before { content: '✓'; position: absolute; left: 0; color: var(--ta-blue); font-weight: bold; }
 
         /* コンポーネント */
-        .card { 
-            background: rgba(255, 255, 255, 0.8); 
-            border: 1px solid var(--ta-border); 
-            border-radius: 24px; padding: 2.5rem; 
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
+        .card { background: rgba(255, 255, 255, 0.8); border: 1px solid var(--ta-border); border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05); transition: all 0.3s ease; }
         .card:hover { transform: translateY(-5px); border-color: var(--ta-blue); box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.1); }
         
         .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; }
@@ -96,34 +90,29 @@
         .agent-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; background: rgba(37, 99, 235, 0.1); color: var(--ta-blue); padding: 0.4rem 1.2rem; border-radius: 50px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(37, 99, 235, 0.2); }
         .mockup-ui { background: #f8fafc; border-radius: 16px; padding: 2rem; border: 1px solid #e2e8f0; margin-top: 1.5rem; }
         .ai-response { border-left: 4px solid var(--ta-blue); padding-left: 1.5rem; margin-top: 1.5rem; color: var(--ta-navy); font-weight: 600; font-style: italic; }
-        .code-block { background: #0f172a; color: #e2e8f0; padding: 1.5rem; border-radius: 12px; font-family: monospace; font-size: 0.85rem; overflow-x: auto; margin-top: 1rem; line-height: 1.6; }
+        .code-block { background: #0f172a; color: #e2e8f0; padding: 1.5rem; border-radius: 12px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; overflow-x: auto; margin-top: 1rem; line-height: 1.6; box-shadow: inset 0 2px 10px rgba(0,0,0,0.3); }
 
-        /* 🔐 認証ゲート (確実な中央揃え) */
-        #gate { 
-            position: fixed; inset: 0; background: var(--ta-bg); 
-            background-image: 
-                linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            display: flex; justify-content: center; align-items: center; z-index: 1000; 
-            transition: opacity 0.5s ease;
-        }
-        .auth-card { background: white; border: 1px solid var(--ta-border); border-radius: 30px; padding: 3.5rem; max-width: 450px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.05); text-align: center; }
+        /* 🔐 認証ゲート */
+        #gate { position: fixed; inset: 0; background: var(--ta-bg); background-image: linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px); background-size: 50px 50px; display: flex; justify-content: center; align-items: center; z-index: 1000; transition: opacity 0.5s ease; }
+        .auth-card { background: white; border: 1px solid var(--ta-border); border-radius: 30px; padding: 4rem 3rem; max-width: 480px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.05); text-align: center; }
         .input-group { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
         input { padding: 1.2rem; border-radius: 12px; border: 1px solid #cbd5e1; outline: none; font-size: 1rem; transition: 0.2s; }
         input:focus { border-color: var(--ta-blue); }
-        .auth-btn { padding: 1.2rem; background: var(--ta-grad); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2); }
+        .auth-btn { padding: 1.2rem; background: var(--ta-grad); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2); transition: 0.2s; }
+        .auth-btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
-        /* 🧭 ナビゲーションボタン */
+        /* 🧭 ナビゲーション */
         .slide-nav { position: fixed; right: 2rem; bottom: 2rem; display: flex; flex-direction: column; gap: 0.8rem; z-index: 100; }
         .nav-btn { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--ta-border); background: white; color: var(--ta-blue); cursor: pointer; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.2s; }
         .nav-btn:hover { background: var(--ta-blue); color: white; transform: scale(1.1); }
 
-        /* アニメーション用 */
+        /* アニメーション */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
         .slide.visible .reveal { opacity: 1; transform: translateY(0); }
-        .reveal:nth-child(2) { transition-delay: 0.15s; }
-        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(2) { transition-delay: 0.1s; }
+        .reveal:nth-child(3) { transition-delay: 0.2s; }
+        .reveal:nth-child(4) { transition-delay: 0.3s; }
+        .reveal:nth-child(5) { transition-delay: 0.4s; }
     </style>
 </head>
 <body>
@@ -132,12 +121,12 @@
 
     <div id="gate">
         <div class="auth-card">
-            <div class="agent-tag">ThinkingAI Identity</div>
-            <h2 style="font-size: 2rem;">System Authorization</h2>
-            <p style="color: var(--ta-slate); margin-top: 1rem;">本フレームワークは関係者専用です。<br>認証用アドレスを入力してください。</p>
+            <div class="agent-tag">ThinkingAI Security</div>
+            <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Access Portal</h2>
+            <p style="color: var(--ta-slate); font-size: 0.95rem;">メガガイド・全12セクションへアクセスします。<br>認証用アドレス（info@rikus.me）を入力してください。</p>
             <div class="input-group">
                 <input type="email" id="emailInput" placeholder="info@rikus.me">
-                <button class="auth-btn" onclick="checkAccess()">UNLOCK GUIDE</button>
+                <button class="auth-btn" onclick="checkAccess()">UNLOCK FULL GUIDE</button>
             </div>
             <p id="errorMessage" style="color: #ef4444; margin-top: 1.5rem; display: none; font-weight: bold;">Access Denied: Invalid Email</p>
         </div>
@@ -152,32 +141,61 @@
 
         <section class="slide">
             <div class="slide-content centered">
-                <div class="reveal section-label">Design Standards v2.0</div>
-                <h1 class="reveal text-gradient">The "Proposals as Code" <br>Master Framework</h1>
-                <p class="reveal">これは資料ではありません。顧客の期待を超える「体験」をデプロイするための規範です。</p>
+                <div class="reveal section-label">Ultimate Master Guide v3.0</div>
+                <h1 class="reveal text-gradient" style="font-size: clamp(3rem, 8vw, 6rem);">Proposals as Code</h1>
+                <p class="reveal" style="font-size: 1.3rem; max-width: 800px; margin-top: 1rem;">
+                    プレゼン資料の概念を覆す、完全自動化・自律型Web提案システムの構築規範。
+                    全12セクションに及ぶコンポーネントとメッセージングの極意をここに。
+                </p>
+                <div class="reveal" style="margin-top: 5rem;">
+                    <p class="text-dim">Scroll down or use arrow keys ↓</p>
+                </div>
             </div>
         </section>
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">01. Messaging Architecture</div>
-                
+                <div class="reveal section-label">01. Philosophy</div>
+                <div class="message-area reveal">
+                    <div class="main-message">なぜ「コード」で提案するのか？</div>
+                    <div class="sub-message">パワーポイントやPDFは「死んだ情報」です。我々が提供するのは、常に最新で、顧客の行動をトラッキングし、セキュアに管理される「生きたWebアプリケーション」としての提案です。</div>
+                </div>
+                <div class="grid-3 reveal">
+                    <div class="card">
+                        <span class="agent-tag">Single Source</span>
+                        <h3>情報の単一化</h3>
+                        <p>価格や仕様が変わっても、Gitを更新すれば全員の提案書が瞬時に最新になります。</p>
+                    </div>
+                    <div class="card">
+                        <span class="agent-tag">Analytics</span>
+                        <h3>行動の可視化</h3>
+                        <p>顧客がどのページを何秒見たか。JSを通じてCRMへ直接データを流し込みます。</p>
+                    </div>
+                    <div class="card">
+                        <span class="agent-tag">Security</span>
+                        <h3>完全なアクセス制御</h3>
+                        <p>PDFの流出リスクはゼロ。EmailとIPによる厳格な閲覧制限を敷きます。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">02. Messaging Architecture</div>
                 <div class="message-area reveal">
                     <div class="main-message">「主張」と「根拠」を1秒で伝える構造</div>
-                    <div class="sub-message">メインメッセージで結論を断定し、サブメッセージでその理由を補足します。これが全スライド共通の「思考の背骨」となります。</div>
+                    <div class="sub-message">すべてのスライドは、この <code>.message-area</code> から始まります。メインメッセージで結論を断定し、サブメッセージでその理由を補足します。これが全スライド共通の「思考の背骨」となります。</div>
                 </div>
-
                 <div class="grid-2 reveal">
-                    <div class="card">
-                        <span class="agent-tag">New Standard</span>
-                        <h3>メッセージエリアの役割</h3>
-                        <p>スライドの最上部に位置し、読者が最初に目にする領域です。ここを読むだけで、そのページの意図が100%伝わるように記述します。</p>
+                    <div>
+                        <h3>メッセージエリアのコード</h3>
+                        <p>このブロックを配置するだけで、読み手は「このページで何が言いたいのか」を瞬時に理解できます。</p>
                     </div>
                     <div class="code-block">
-<pre><code>&lt;!-- 推奨される構造 --&gt;
-&lt;div class="message-area"&gt;
-  &lt;div class="main-message"&gt;結論（1行）&lt;/div&gt;
-  &lt;div class="sub-message"&gt;補足説明（2行以内）&lt;/div&gt;
+<pre><code>&lt;div class="message-area reveal"&gt;
+  &lt;div class="main-message"&gt;結論となる強い主張&lt;/div&gt;
+  &lt;div class="sub-message"&gt;それを支える背景や理由&lt;/div&gt;
 &lt;/div&gt;</code></pre>
                     </div>
                 </div>
@@ -186,37 +204,173 @@
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">02. Data Contrast</div>
-                
+                <div class="reveal section-label">03. Typography</div>
                 <div class="message-area reveal">
-                    <div class="main-message">対比こそが、意思決定を加速させる</div>
-                    <div class="sub-message"><code>.comp-table</code> を使用し、従来の手法と自社の手法を明確に比較します。ハイライト列を使い、視線を有益な情報へ誘導します。</div>
+                    <div class="main-message">視線誘導をコントロールする文字階層</div>
+                    <div class="sub-message">サイズ、太さ、色をCSSで完全に定義済みです。営業担当者は「どのタグを使うか」を選ぶだけで、美しいタイポグラフィが実現します。</div>
                 </div>
+                <div class="grid-2 reveal">
+                    <div class="card">
+                        <h1 class="text-gradient" style="font-size: 2.5rem; margin-bottom: 1rem;">h1.text-gradient</h1>
+                        <h2 style="margin-bottom: 1rem;">h2: 見出し</h2>
+                        <h3>h3: 小見出し（青アクセント）</h3>
+                        <p>p: 本文は読みやすいスレートグレー。</p>
+                        <p class="text-dim">.text-dim: 補足用の小さなテキスト。</p>
+                    </div>
+                    <div class="code-block">
+<pre><code>&lt;h1 class="text-gradient"&gt;タイトル&lt;/h1&gt;
+&lt;h2&gt;見出し&lt;/h2&gt;
+&lt;h3&gt;小見出し&lt;/h3&gt;
+&lt;p&gt;本文&lt;/p&gt;
+&lt;p class="text-dim"&gt;補足&lt;/p&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">04. Layout: 2 Columns</div>
+                <div class="message-area reveal">
+                    <div class="main-message">対比や解説を生む「2カラム」の力</div>
+                    <div class="sub-message"><code>.grid-2</code> は、左に説明、右に図解やコードを置く「解説型スライド」の王道フォーマットです。</div>
+                </div>
+                <div class="grid-2 reveal">
+                    <div class="card" style="border: 2px solid var(--ta-blue);">
+                        <h3>左側の要素</h3>
+                        <p>ここに課題や特徴の詳細を文章で記述します。必要に応じてリスト表現を組み合わせます。</p>
+                    </div>
+                    <div class="card" style="background: rgba(37, 99, 235, 0.05);">
+                        <h3>右側の要素</h3>
+                        <p>ここには証拠となるデータ、モックアップUI、あるいはコードブロックなどのビジュアル要素を配置します。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">05. Layout: 3 Columns</div>
+                <div class="message-area reveal">
+                    <div class="main-message">リズムを生む「3カラム」展開</div>
+                    <div class="sub-message"><code>.grid-3</code> は、3つのメリット、3つのステップなど、情報を並列に提示してテンポよく読ませたい時に使用します。</div>
+                </div>
+                <div class="grid-3 reveal">
+                    <div class="card">
+                        <span class="agent-tag">Step 01</span>
+                        <h3>AI Prompting</h3>
+                        <p>AIに商談の文脈を伝え、HTMLの出力を指示します。</p>
+                    </div>
+                    <div class="card">
+                        <span class="agent-tag">Step 02</span>
+                        <h3>Git Commit</h3>
+                        <p>生成されたコードを社内のリポジトリにPushします。</p>
+                    </div>
+                    <div class="card">
+                        <span class="agent-tag">Step 03</span>
+                        <h3>Auto Deploy</h3>
+                        <p>Vercelが数秒で専用のURLを発行します。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">06. Glassmorphism</div>
+                <div class="message-area reveal">
+                    <div class="main-message">透明感がもたらす先進的なUI</div>
+                    <div class="sub-message"><code>.card</code> クラスの最大の特徴は、背後のグリッド線や光が「ぼやけて透ける」すりガラス効果です。</div>
+                </div>
+                <div class="grid-2 reveal">
+                    <div class="card" style="padding: 3rem;">
+                        <span class="agent-tag">Interactive</span>
+                        <h3 style="font-size: 1.8rem;">Hover Effect</h3>
+                        <p style="font-size: 1.1rem; margin-top: 1rem;">
+                            マウスをこのカードに乗せてみてください。<br>
+                            フワッと浮き上がり、青いボーダーと影がハイライトされます。これが「触れる提案書」の質感です。
+                        </p>
+                    </div>
+                    <div class="code-block">
+<pre><code>/* カードのCSS定義（参考） */
+.card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--ta-blue);
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">07. Data Display: Lists</div>
+                <div class="message-area reveal">
+                    <div class="main-message">美しいリストで要点を整理する</div>
+                    <div class="sub-message">箇条書きには <code>.custom-list</code> を使用します。自動で付与されるチェックマークが、プロフェッショナルな印象を与えます。</div>
+                </div>
+                <div class="grid-2 reveal">
+                    <div class="card">
+                        <h3>導入のメリット</h3>
+                        <ul class="custom-list" style="margin-top: 1.5rem;">
+                            <li>提案書作成にかかる時間を80%削減</li>
+                            <li>デザインのトーン＆マナーを完全統一</li>
+                            <li>顧客の閲覧データを直接Salesforceへ連携</li>
+                            <li>Gitによる完璧なバージョン管理・ロールバック</li>
+                        </ul>
+                    </div>
+                    <div class="code-block">
+<pre><code>&lt;ul class="custom-list"&gt;
+  &lt;li&gt;提案書作成にかかる時間を80%削減&lt;/li&gt;
+  &lt;li&gt;デザインのトーン＆マナーを完全統一&lt;/li&gt;
+  &lt;li&gt;顧客の閲覧データを連携&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">08. Data Display: Tables</div>
+                <div class="message-area reveal">
+                    <div class="main-message">比較表で「選ぶべき理由」を証明する</div>
+                    <div class="sub-message"><code>.comp-table</code> と <code>.highlight-col</code> を使い、自社（あるいは新しい手法）の優位性を視覚的にハイライトします。</div>
+                </div>
                 <div class="table-container reveal">
                     <table class="comp-table">
                         <thead>
                             <tr>
-                                <th>要件</th>
-                                <th>従来の手法 (PDF/PPT)</th>
-                                <th class="highlight-col">ThinkingAI Framework</th>
+                                <th>機能要件</th>
+                                <th>旧来のPowerPoint</th>
+                                <th>一般的なWeb作成ツール</th>
+                                <th class="highlight-col">Proposals as Code</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>情報の鮮度</td>
-                                <td>静的（送付後に更新不可）</td>
-                                <td class="highlight-col">動的（Web同期で常に最新）</td>
+                                <td>AIによる自動生成</td>
+                                <td>× 不可</td>
+                                <td>△ 一部対応</td>
+                                <td class="highlight-col">◎ ネイティブ対応</td>
                             </tr>
                             <tr>
-                                <td>セキュリティ</td>
-                                <td>パスワード付きZIP</td>
-                                <td class="highlight-col">Email認証 / IP制限 / 期限管理</td>
+                                <td>データ主権（MCP連携）</td>
+                                <td>× 不可</td>
+                                <td>× ベンダー依存</td>
+                                <td class="highlight-col">◎ 自社Gitで完全掌握</td>
                             </tr>
                             <tr>
-                                <td>顧客分析</td>
-                                <td>誰が読んだか不明</td>
-                                <td class="highlight-col">滞在時間・読了率の完全可視化</td>
+                                <td>インタラクティブUI</td>
+                                <td>× 静的</td>
+                                <td>△ 制限あり</td>
+                                <td class="highlight-col">◎ JSで無制限に拡張可</td>
                             </tr>
                         </tbody>
                     </table>
@@ -226,27 +380,31 @@
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">03. UI Catalog</div>
+                <div class="reveal section-label">09. Tech Mockups</div>
                 <div class="message-area reveal">
-                    <div class="main-message">部品（コンポーネント）の適切な使い分け</div>
-                    <div class="sub-message">情報の粒度に合わせてグリッドやカード、モックアップを組み合わせ、飽きさせない視覚構成を作ります。</div>
+                    <div class="main-message">AIとの協働をリアルに描写する</div>
+                    <div class="sub-message">システムの使い方や、AI Agentの思考プロセスを見せるための <code>.mockup-ui</code> コンポーネントです。</div>
                 </div>
-                
-                <div class="grid-3 reveal">
-                    <div class="card">
-                        <span class="agent-tag">Component</span>
-                        <h3>Card (.card)</h3>
-                        <p>すりガラス効果。情報をグループ化し、浮遊感を与えます。</p>
-                    </div>
+                <div class="grid-2 reveal">
                     <div class="mockup-ui">
-                        <p style="color: var(--ta-slate); font-size: 0.8rem;">> AI Simulation</p>
+                        <div style="font-size: 0.9rem; color: var(--ta-slate); margin-bottom: 0.5rem;">
+                            > AIエージェントへの指示プロンプト
+                        </div>
+                        <div style="font-weight: bold;">
+                            「A社向けのインフラ刷新提案を、grid-3の比較を用いて作成して」
+                        </div>
+                        
                         <div class="ai-response">
-                            このコンポーネントでAIとの対話を見せます。
+                            承知しました。過去の類似商談のGitリポジトリをパースし、最適な構成案を生成しました。<br><br>
+                            ✅ HTML生成完了<br>
+                            ✅ Vercelデプロイ完了<br>
+                            🔗 https://proposal.company.com/a-corp
                         </div>
                     </div>
-                    <div class="card">
-                        <h3>Grid (.grid-3)</h3>
-                        <p>3つの特徴やステップを並列に示す際に使用します。</p>
+                    <div>
+                        <h3>システムの「中身」を見せる</h3>
+                        <p>顧客に対して「裏側で何が起きているか」を明かすことは、強い納得感を生みます。</p>
+                        <p style="margin-top: 1rem;"><code>.ai-response</code> の青いサイドラインが、AIからの出力であることをスマートに表現します。</p>
                     </div>
                 </div>
             </div>
@@ -254,19 +412,29 @@
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">04. Interaction</div>
+                <div class="reveal section-label">10. Practical Example</div>
                 <div class="message-area reveal">
-                    <div class="main-message">「操作できる」ことが信頼を生む</div>
-                    <div class="sub-message">マウス追従の光やキーボード操作、スムーズな遷移。これらのディテールが、他社との圧倒的な差になります。</div>
+                    <div class="main-message">実践：インパクトのある数字の見せ方</div>
+                    <div class="sub-message">これまでのコンポーネントを組み合わせた、実際の「ROI（投資対効果）提示」スライドの例です。</div>
                 </div>
-                <div class="grid-2 reveal">
-                    <div class="card">
-                        <h3>キーボード操作</h3>
-                        <p>「→」「↓」「スペース」で次へ、「←」「↑」で前へ戻ります。プレゼンリモコンにも完全対応しています。</p>
+                <div class="grid-2 reveal" style="align-items: center;">
+                    <div>
+                        <h3 style="font-size: 2rem;">劇的な生産性向上</h3>
+                        <p style="font-size: 1.2rem; margin-top: 1rem;">
+                            本システムの導入により、営業担当者は「資料の体裁を整える」という無駄な作業から完全に解放されます。
+                        </p>
+                        <ul class="custom-list" style="margin-top: 2rem;">
+                            <li>資料作成時間がゼロに</li>
+                            <li>商談準備はAIとの5分の対話のみ</li>
+                            <li>顧客の解像度を上げる時間にフルコミット</li>
+                        </ul>
                     </div>
-                    <div class="card">
-                        <h3>マウス追従</h3>
-                        <p>背景にうっすらと光が差す演出により、デジタルホワイトボードのような質感を生んでいます。</p>
+                    <div class="card centered" style="padding: 4rem 2rem; border: 2px solid var(--ta-blue);">
+                        <p style="font-weight: bold; color: var(--ta-slate); letter-spacing: 0.2em;">提案業務の削減率</p>
+                        <div class="text-gradient" style="font-size: 6rem; font-weight: 900; line-height: 1; margin: 1rem 0;">
+                            -85<span style="font-size: 3rem;">%</span>
+                        </div>
+                        <span class="agent-tag" style="margin: 0;">Verified by Analytics Agent</span>
                     </div>
                 </div>
             </div>
@@ -274,8 +442,15 @@
 
         <section class="slide centered">
             <div class="slide-content centered">
-                <h1 class="reveal text-gradient" style="font-size: 8vw;">Start Deployment.</h1>
-                <p class="reveal">正しい構造と、美しいコード。それが、次世代のセールスの正体です。</p>
+                <div class="agent-tag reveal" style="font-size: 1rem; padding: 0.5rem 1.5rem;">System Ready</div>
+                <h1 class="reveal text-gradient" style="font-size: clamp(3.5rem, 8vw, 6rem);">Code Your Sales.</h1>
+                <p class="reveal" style="font-size: 1.3rem; max-width: 600px; margin-top: 1rem;">
+                    必要なパーツはすべて揃いました。<br>
+                    さあ、あなたの最高の提案をデプロイしましょう。
+                </p>
+                <div class="reveal" style="margin-top: 5rem;">
+                    <button class="auth-btn" style="padding: 1.2rem 4rem; font-size: 1.2rem;" onclick="goToSlide(0)">トップへ戻る</button>
+                </div>
             </div>
         </section>
 
@@ -285,13 +460,13 @@
         const ALLOWED_EMAIL = 'info@rikus.me';
         let currentSlideIndex = 0;
 
-        // 🌟 マウス追従ロジック
+        // マウス追従
         document.addEventListener('mousemove', (e) => {
             document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
             document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
         });
 
-        // 🔐 認証チェック
+        // 認証
         function checkAccess() {
             const input = document.getElementById('emailInput').value.toLowerCase();
             const gate = document.getElementById('gate');
@@ -305,7 +480,7 @@
                     gate.style.display = 'none';
                     content.style.display = 'block';
                     if (slideNav) slideNav.style.display = 'flex';
-                    sessionStorage.setItem('ta_auth_v2', 'active');
+                    sessionStorage.setItem('ta_mega_auth', 'active');
                     initPresentation();
                 }, 500);
             } else {
@@ -313,10 +488,9 @@
             }
         }
 
-        // 👁️ スライド監視 & アニメーション初期化
+        // アニメーション監視
         function initPresentation() {
             const slides = Array.from(document.querySelectorAll('.slide'));
-            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -324,15 +498,13 @@
                         currentSlideIndex = slides.indexOf(entry.target);
                     }
                 });
-            }, { threshold: 0.4 }); // 40%見えたら発火
+            }, { threshold: 0.3 }); // 30%見えたらアニメーション発火
 
             slides.forEach(slide => observer.observe(slide));
-            
-            // 初回スライドを強制的に発火
             slides[0].classList.add('visible');
         }
 
-        // ⌨️ スライド遷移
+        // スライド遷移
         function goToSlide(index) {
             const slides = document.querySelectorAll('.slide');
             if (index >= 0 && index < slides.length) {
@@ -341,7 +513,7 @@
             }
         }
 
-        // キーボードイベント
+        // キーボード操作
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('gate').style.display !== 'none') return;
             
@@ -354,12 +526,13 @@
             }
         });
 
-        // ロード時
+        // リロード時
         window.onload = () => {
-            if (sessionStorage.getItem('ta_auth_v2') === 'active') {
+            if (sessionStorage.getItem('ta_mega_auth') === 'active') {
                 document.getElementById('gate').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
-                document.getElementById('slideNav').style.display = 'flex';
+                const slideNav = document.getElementById('slideNav');
+                if (slideNav) slideNav.style.display = 'flex';
                 initPresentation();
             }
         };
