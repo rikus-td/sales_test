@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Complete Guide: Proposals as Code</title>
+    <title>Master Guide: ThinkingAI Proposals</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,98 +13,39 @@
     </div>
 
     <div id="gate">
-        <div class="card centered">
-            <div class="agent-tag">ThinkingAI System</div>
-            <h2>Identity Verification</h2>
-            <input type="email" id="emailInput" placeholder="info@rikus.me" style="padding:1rem; width:100%; margin:1rem 0; border:1px solid #ddd; border-radius:8px;">
-            <button onclick="checkAccess()" style="padding:1rem 2rem; background:var(--ta-grad); color:white; border:none; border-radius:8px; cursor:pointer; width:100%; font-weight:bold;">ENTER</button>
+        <div class="card centered" style="max-width: 400px;">
+            <div class="agent-tag">Authorization</div>
+            <h2>Identity Verify</h2>
+            <input type="email" id="emailInput" placeholder="info@rikus.me" style="width:100%; padding:1rem; margin:1rem 0; border:1px solid #ddd; border-radius:8px;">
+            <button onclick="checkAccess()" style="width:100%; padding:1rem; background:var(--ta-grad); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">ENTER SYSTEM</button>
         </div>
     </div>
 
     <main id="content" style="display:none;">
         <section class="slide">
             <div class="slide-content centered">
-                <div class="reveal section-label">The Future of Sales</div>
-                <h1 class="reveal text-gradient">Proposals as Code</h1>
-                <p class="reveal">これは「資料」ではありません。顧客と並走するための「プログラム」です。</p>
+                <div class="reveal section-label">Design Standards v2.0</div>
+                <h1 class="reveal text-gradient">ThinkingAI<br>Proposal Framework</h1>
+                <p class="reveal">メッセージの構造化と、データによる比較。説得力を最大化するガイドライン。</p>
             </div>
         </section>
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">Why Now?</div>
-                <h2 class="reveal">静的資料（PDF/PPT）の終焉</h2>
-                <div class="grid-3 reveal">
-                    <div class="card"><h3>情報の劣化</h3><p>一度送ったPDFは更新できません。</p></div>
-                    <div class="card"><h3>追跡不能</h3><p>誰がどこを読んだか分かりません。</p></div>
-                    <div class="card"><h3>体験の断絶</h3><p>ただ「読む」だけの受動的な体験です。</p></div>
+                <div class="reveal section-label">01. Messaging Architecture</div>
+                <div class="message-area reveal">
+                    <div class="main-message">「主張」と「根拠」を明確に分離する</div>
+                    <div class="sub-message">メインメッセージで結論を述べ、サブメッセージでその背景や数値を補足します。これがスライドの「背骨」となります。</div>
                 </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <div class="slide-content">
-                <div class="reveal section-label">01. Structure</div>
-                <h2 class="reveal">スライドの基本構造</h2>
-                <div class="grid-2 reveal">
-                    <div>
-                        <p>すべてのページは <code>.slide</code> で構成され、スクロールスナップによって制御されます。偶数ページは自動的にグレー背景になります。</p>
-                    </div>
-                    <div class="code-block">
-<pre><code>&lt;section class="slide"&gt;
-  &lt;div class="slide-content"&gt;
-    &lt;!-- ここにコンテンツ --&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <div class="slide-content">
-                <div class="reveal section-label">02. Typography</div>
-                <h2 class="reveal">フォントと階層の定義</h2>
                 <div class="grid-2 reveal">
                     <div class="card">
-                        <h1 class="text-gradient" style="font-size:2rem;">H1 Gradient</h1>
-                        <h3>H3 Blue Accent</h3>
-                        <p>P Standard Text Body</p>
+                        <h3><code>.main-message</code></h3>
+                        <p>スライドの最上部に位置し、そのページで最も伝えたいことを24pt以上の太字で記述します。</p>
                     </div>
                     <div class="code-block">
-<pre><code>&lt;h1 class="text-gradient"&gt;タイトル&lt;/h1&gt;
-&lt;h3&gt;サブ見出し&lt;/h3&gt;
-&lt;p&gt;本文&lt;/p&gt;</code></pre>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <div class="slide-content">
-                <div class="reveal section-label">03. Layouts</div>
-                <h2 class="reveal">グリッドシステムの使い分け</h2>
-                <div class="grid-2 reveal">
-                    <div class="card"><h3>.grid-2</h3><p>対比や、説明と図解を並べる際に最適です。</p></div>
-                    <div class="card"><h3>.grid-3</h3><p>3つの特徴やステップを示す際に使用します。</p></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <div class="slide-content">
-                <div class="reveal section-label">04. Components</div>
-                <h2 class="reveal">カードとすりガラス効果</h2>
-                <div class="grid-2 reveal">
-                    <div class="card">
-                        <span class="agent-tag">Component</span>
-                        <h3>.card</h3>
-                        <p>背後のグリッドが透ける「すりガラス（Glassmorphism）」を採用。浮遊感を演出します。</p>
-                    </div>
-                    <div class="code-block">
-<pre><code>&lt;div class="card"&gt;
-  &lt;span class="agent-tag"&gt;タグ&lt;/span&gt;
-  &lt;h3&gt;タイトル&lt;/h3&gt;
+<pre><code>&lt;div class="message-area"&gt;
+  &lt;div class="main-message"&gt;ここに結論&lt;/div&gt;
+  &lt;div class="sub-message"&gt;ここに補足説明&lt;/div&gt;
 &lt;/div&gt;</code></pre>
                     </div>
                 </div>
@@ -113,48 +54,65 @@
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">05. AI Elements</div>
-                <h2 class="reveal">AIモックアップの表現</h2>
+                <div class="reveal section-label">02. Comparison Table</div>
+                <div class="message-area reveal">
+                    <div class="main-message">定量的・定性的な比較を直感的に示す</div>
+                    <div class="sub-message">競合比較やBefore/Afterの提示には <code>.comp-table</code> クラスを使用します。ハイライト列で自社の優位性を強調できます。</div>
+                </div>
+                <div class="table-container reveal">
+                    <table class="comp-table">
+                        <thead>
+                            <tr><th>特徴</th><th>従来の手法</th><th class="highlight-col">ThinkingAI</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>更新性</td><td>静的（PDF/PPT）</td><td class="highlight-col">動的（Web/Real-time）</td></tr>
+                            <tr><td>セキュリティ</td><td>パスワード付きZIP</td><td class="highlight-col">Email 認証 / IP制限</td></tr>
+                            <tr><td>分析</td><td>不可</td><td class="highlight-col">読了率・滞在時間の可視化</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="code-block reveal" style="margin-top:2rem;">
+<pre><code>&lt;table class="comp-table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;項目&lt;/th&gt;&lt;th class="highlight-col"&gt;自社&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;特徴1&lt;/td&gt;&lt;td class="highlight-col"&gt;最高&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">03. Typography & Flow</div>
+                <div class="message-area reveal">
+                    <div class="main-message">情報の優先順位をデザインで制御する</div>
+                    <div class="sub-message">H2、H3、Pタグの適切な使い分けにより、読み手の視線誘導をスムーズに行います。</div>
+                </div>
                 <div class="grid-2 reveal">
-                    <div class="mockup-ui">
-                        <p class="text-dim">> Proposal Insight</p>
-                        <div class="ai-response">顧客は料金ページを3分間閲覧しました。フォローアップを推奨します。</div>
-                    </div>
                     <div class="card">
-                        <h3>.mockup-ui</h3>
-                        <p>システムとの対話や、AIの挙動をシミュレーションする際に使用するコンポーネントです。</p>
+                        <h3>H2: セクションの問いかけ</h3>
+                        <p>読者の興味を引く具体的な問いや課題を配置します。</p>
+                        <h3 style="margin-top:1.5rem;">H3: 具体的な解決策</h3>
+                        <p>カード内などで使用し、具体的な手法を示します。</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <div class="slide-content">
-                <div class="reveal section-label">06. Motion</div>
-                <h2 class="reveal">スクロール・リリビール</h2>
-                <div class="card reveal">
-                    <h3>.reveal の付与</h3>
-                    <p>要素に <code>reveal</code> クラスを付けるだけで、画面に入った瞬間に下から浮かび上がります。JSが順序を制御します。</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <div class="slide-content">
-                <div class="reveal section-label">07. Interaction</div>
-                <h2 class="reveal">マウスとキーボードの制御</h2>
-                <div class="grid-3 reveal">
-                    <div class="card"><h3>Mouse Glow</h3><p>マウスに光が追従し、デジタルの質感を与えます。</p></div>
-                    <div class="card"><h3>Keyboard Nav</h3><p>矢印キーでスライドを瞬時に切り替えます。</p></div>
-                    <div class="card"><h3>Button Nav</h3><p>右下のボタンで直感的に操作可能です。</p></div>
+                    <div class="code-block">
+<pre><code>&lt;h2&gt;セクションの問いかけ&lt;/h2&gt;
+&lt;div class="card"&gt;
+  &lt;h3&gt;解決策のタイトル&lt;/h3&gt;
+  &lt;p&gt;詳細説明...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="slide centered">
             <div class="slide-content centered">
-                <h1 class="reveal text-gradient">The Future is Coded.</h1>
-                <p class="reveal">このガイドラインを元に、あなただけの最強の提案書をデプロイしてください。</p>
+                <h1 class="reveal text-gradient">Deliver Impact.</h1>
+                <p class="reveal">正しい構造と美しいデザインが、あなたの提案を「結果」に変えます。</p>
             </div>
         </section>
     </main>
