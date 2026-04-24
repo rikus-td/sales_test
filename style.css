@@ -107,3 +107,44 @@ p { font-size: 1.05rem; line-height: 1.8; color: var(--ta-text-dim); margin-bott
 input { padding: 1rem; border-radius: 10px; border: 1px solid #cbd5e1; background: #ffffff; color: var(--ta-text-main); font-size: 1rem; outline: none; transition: border-color 0.2s; }
 input:focus { border-color: var(--ta-blue); }
 button { padding: 1rem; background: var(--ta-grad-btn); border: none; border-radius: 10px; font-weight: bold; cursor: pointer; color: #ffffff; transition: opacity 0.2s;
+
+/* 🌗 偶数ページの背景を薄いグレーにする */
+/* （rgbaを使って半透明にすることで、背後のグリッド線を残したままグレーにします） */
+.slide:nth-child(even) {
+    background-color: rgba(15, 23, 42, 0.04);
+    box-shadow: inset 0 2px 15px rgba(0,0,0,0.02); /* 立体感を追加 */
+}
+
+/* 🧭 画面右下のナビゲーションボタン */
+.slide-nav {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 100;
+}
+
+.nav-btn {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid var(--ta-card-border);
+    color: var(--ta-blue);
+    font-weight: bold;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    background: var(--ta-blue);
+    color: white;
+    transform: scale(1.1);
+}
