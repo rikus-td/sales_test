@@ -2,51 +2,131 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>提案書</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal | 次世代セールスアーキテクチャ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<section class="slide">
-    <div class="slide-content centered">
-        <div class="reveal section-label">Proposal 2026</div>
-        <h1 class="reveal text-gradient">AI主導の次世代セールス</h1>
-        <p class="reveal">データとインサイトを完全に統合した自律型アプローチのご提案</p>
-    </div>
-</section>
-
-<section class="slide">
-    <div class="slide-content">
-        <div class="reveal section-label">Core Solution</div>
-        <h2 class="reveal">自律型Agentによる業務の変革</h2>
-        
-        <div class="grid-2 reveal">
-            <div>
-                <h3>データ分析Agentの導入</h3>
-                <p>従来は人間が数日かけていた要因特定を、Agentがリアルタイムで完遂します。自然言語での問いかけに対し、即座にインサイトを提供します。</p>
-                
-                <div class="mockup-ui">
-                    <div style="color: var(--accent-secondary);">User: 昨日のエンゲージメント低下の原因は？</div>
-                    <div class="ai-response">Agent: V2.1アップデート後の特定のフローでの離脱が主要因と推測されます。</div>
-                </div>
+    <div id="gate" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-main); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+        <div class="card" style="text-align: center; max-width: 400px; padding: 3rem; width: 90%;">
+            <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Restricted Access</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 2rem; color: var(--text-secondary);">本提案資料を閲覧するには、権限のあるメールアドレスを入力してください。</p>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="email" id="emailInput" placeholder="info@rikus.me" style="padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.5); color: white; outline: none;">
+                <button onclick="checkAccess()" style="padding: 1rem; background: var(--grad-primary); border: none; border-radius: 8px; color: #000; font-weight: bold; cursor: pointer; transition: opacity 0.2s;">認証して閲覧を開始</button>
             </div>
-            
-            <div class="card">
-                <span class="agent-tag">Speed & Accuracy</span>
-                <h3>10秒での要因特定</h3>
-                <p>圧倒的な速度でインサイトを抽出し、次の施策の立案（実験）へと即座に引き継ぐことが可能になります。</p>
-            </div>
+            <p id="errorMessage" style="color: #ef4444; margin-top: 1rem; display: none; font-size: 0.85rem;">アクセス権限がありません。</p>
         </div>
     </div>
-</section>
 
-<script>
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
+    <main id="content" style="display: none;">
+
+        <section class="slide">
+            <div class="slide-content centered">
+                <div class="reveal section-label">Confidential Proposal</div>
+                <h1 class="reveal text-gradient" style="font-size: clamp(2.5rem, 6vw, 5rem);">Proposals as Code</h1>
+                <p class="reveal" style="font-size: clamp(1.2rem, 2vw, 1.5rem); margin-top: 1rem;">Webテクノロジーが導く、次世代の「動的」セールス体験</p>
+                <div class="reveal" style="margin-top: 3rem; color: var(--text-secondary); font-size: 0.9rem;">
+                    <p id="userDisplay"></p> <p style="margin-top: 0.5rem;">2026.04.24 | Digital Sales Team</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">Current Challenges</div>
+                <h2 class="reveal">既存のPDF/PPT資料の限界</h2>
+                <div class="grid-3 reveal">
+                    <div class="card">
+                        <h3>情報のブラックボックス化</h3>
+                        <p>ファイルを送信した後、顧客が「どのページを」「何分見たか」をトラッキングできず、フォローアップのタイミングが完全に勘に依存しています。</p>
+                    </div>
+                    <div class="card">
+                        <h3>バージョンの乱立</h3>
+                        <p>「最新版_v3_最終.pdf」といったファイルがローカルに散乱し、誤って古い仕様や価格をお客様に送付してしまうリスクが常態化しています。</p>
+                    </div>
+                    <div class="card">
+                        <h3>静的で受動的な体験</h3>
+                        <p>顧客は資料をただ「読む」だけです。自社の数値を入力して効果を測るような、インタラクティブな商談体験を提供できていません。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">Core Solution</div>
+                <h2 class="reveal">AI × Git × Vercel による完全な自律化</h2>
+                
+                <div class="grid-2 reveal">
+                    <div>
+                        <span class="agent-tag">MCP Integration</span>
+                        <h3>会話から「専用Webページ」を即時生成</h3>
+                        <p>営業担当者はAIと対話するだけです。AIが過去の提案リポジトリ（MCP）を参照し、顧客に最適化されたHTMLを生成。Vercel経由で即座にセキュアなURLが発行されます。</p>
+                        
+                        <div class="mockup-ui">
+                            <div style="color: var(--text-secondary); font-size: 0.85rem;">> A社向けの次期インフラ刷新提案を作成して。</div>
+                            <div class="ai-response" style="font-size: 0.85rem;">
+                                承知しました。過去の同業他社の成功事例からロジックを抽出します。<br>
+                                ✅ HTML/JS 生成完了<br>
+                                ✅ Vercelへのデプロイ完了<br>
+                                🔗 <span style="color: var(--accent-cyan);">https://proposal.company.com/a-corp</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="agent-tag" style="background: var(--accent-blue);">Zero Friction</span>
+                        <h3> Docs as Codeの実現</h3>
+                        <p style="margin-bottom: 1rem;">画像やロゴの配置も、指定のディレクトリを参照するだけ。手作業でのレイアウト調整は一切不要になります。</p>
+                        <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; margin-left: 1.2rem;">
+                            <li>アクセス権と有効期限のJS制御</li>
+                            <li>行動データのCRMへの自動連携</li>
+                            <li>一貫したコーポレートデザインの担保</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content centered">
+                <div class="reveal section-label">Business Impact</div>
+                <h2 class="reveal">導入による期待効果</h2>
+                <p class="reveal" style="max-width: 600px; text-align: center; margin-bottom: 3rem;">商談の準備時間を劇的に削減し、データドリブンなクロージングを実現します。</p>
+                
+                <div class="grid-2 reveal" style="width: 100%; max-width: 800px;">
+                    <div class="card centered" style="justify-content: center;">
+                        <p style="font-size: 1rem; color: var(--text-secondary); font-weight: bold; margin-bottom: 0.5rem;">資料作成時間</p>
+                        <div style="font-size: 4rem; font-weight: 900; line-height: 1; color: var(--accent-cyan);">-85<span style="font-size: 2rem;">%</span></div>
+                    </div>
+                    <div class="card centered" style="justify-content: center;">
+                        <p style="font-size: 1rem; color: var(--text-secondary); font-weight: bold; margin-bottom: 0.5rem;">成約率（トラッキング活用）</p>
+                        <div style="font-size: 4rem; font-weight: 900; line-height: 1; background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">+40<span style="font-size: 2rem;">%</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            document.querySelectorAll('.slide').forEach(slide => {
+                observer.observe(slide);
+            });
         });
-    }, { threshold: 0.4 });
-    document.querySelectorAll('.slide').forEach(slide => observer.observe(slide));
-</script>
+    </script>
 </body>
 </html>
