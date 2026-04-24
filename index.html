@@ -2,60 +2,51 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Proposal | Your Company</title>
+    <title>提案書</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="gate">
-        <div class="gate-container">
-            <h1>Exclusive Access</h1>
-            <p>本提案資料を閲覧するには、ご登録のメールアドレスを入力してください。</p>
-            <div class="input-group">
-                <input type="email" id="emailInput" placeholder="example@domain.com">
-                <button onclick="checkAccess()">閲覧を開始する</button>
+<section class="slide">
+    <div class="slide-content centered">
+        <div class="reveal section-label">Proposal 2026</div>
+        <h1 class="reveal text-gradient">AI主導の次世代セールス</h1>
+        <p class="reveal">データとインサイトを完全に統合した自律型アプローチのご提案</p>
+    </div>
+</section>
+
+<section class="slide">
+    <div class="slide-content">
+        <div class="reveal section-label">Core Solution</div>
+        <h2 class="reveal">自律型Agentによる業務の変革</h2>
+        
+        <div class="grid-2 reveal">
+            <div>
+                <h3>データ分析Agentの導入</h3>
+                <p>従来は人間が数日かけていた要因特定を、Agentがリアルタイムで完遂します。自然言語での問いかけに対し、即座にインサイトを提供します。</p>
+                
+                <div class="mockup-ui">
+                    <div style="color: var(--accent-secondary);">User: 昨日のエンゲージメント低下の原因は？</div>
+                    <div class="ai-response">Agent: V2.1アップデート後の特定のフローでの離脱が主要因と推測されます。</div>
+                </div>
             </div>
-            <p id="errorMessage" class="error" style="display: none;">アクセス権限がありません。</p>
+            
+            <div class="card">
+                <span class="agent-tag">Speed & Accuracy</span>
+                <h3>10秒での要因特定</h3>
+                <p>圧倒的な速度でインサイトを抽出し、次の施策の立案（実験）へと即座に引き継ぐことが可能になります。</p>
+            </div>
         </div>
     </div>
+</section>
 
-    <main id="content" style="display: none;">
-        <header>
-            <nav>
-                <span class="logo">Digital Sales Room</span>
-                <span id="userDisplay"></span>
-            </nav>
-        </header>
-
-        <section class="hero">
-            <h1>次世代セールス基盤の構築に向けたご提案</h1>
-            <p>AIとWebテクノロジーを融合させた、新しい営業体験のプロトタイプ</p>
-        </section>
-
-        <section class="proposal-body">
-            <h2>01. 現状の課題</h2>
-            <p>従来のPDF資料では、顧客の行動が追えず、更新性にも欠けるという課題があります。</p>
-
-            <h2>02. 解決策</h2>
-            <p>HTML/CSS/JSベースの提案書により、以下の価値を提供します：</p>
-            <ul>
-                <li>リアルタイムな内容更新</li>
-                <li>詳細なアクセスログ解析</li>
-                <li>インタラクティブなシミュレーション機能</li>
-            </ul>
-
-            <div class="pricing-card">
-                <h3>Estimated ROI</h3>
-                <p class="price">250%<span> Increase</span></p>
-            </div>
-        </section>
-
-        <footer>
-            <p>&copy; 2024 Your Company Inc. All rights reserved.</p>
-        </footer>
-    </main>
-
-    <script src="script.js"></script>
+<script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.slide').forEach(slide => observer.observe(slide));
+</script>
 </body>
 </html>
