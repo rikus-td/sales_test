@@ -1,31 +1,59 @@
 const ALLOWED_EMAIL = 'info@rikus.me';
 
+// 認証チェック
 function checkAccess() {
-    const emailInput = document.getElementById('emailInput').value;
-    const errorMessage = document.getElementById('errorMessage');
+    const emailInput = document.getElementById('emailInput').value.toLowerCase();
     const gate = document.getElementById('gate');
     const content = document.getElementById('content');
-    const userDisplay = document.getElementById('userDisplay');
+    const error = document.getElementById('errorMessage');
 
-    if (emailInput.toLowerCase() === ALLOWED_EMAIL.toLowerCase()) {
-        // 認証成功
+    if (emailInput === ALLOWED_EMAIL) {
+        // ゲートを隠し、コンテンツを表示
         gate.style.display = 'none';
         content.style.display = 'block';
-        userDisplay.innerText = `Logged in as: ${emailInput}`;
         
-        // セッションに保存（ブラウザを閉じない限り有効）
-        sessionStorage.setItem('isAuthenticated', 'true');
+        // ユーザー情報を表示
+        if (document.getElementById('userDisplay')) {
+            document.getElementById('userDisplay').innerText = `Authorized Access: ${emailInput}`;
+        }
+        
+        // セッション保存
+        sessionStorage.setItem('is_authorized', 'true');
+
+        // コンテンツが表示された後にアニメーション監視を開始
+        setTimeout(initScrollObserver, 100);
     } else {
-        // 認証失敗
-        errorMessage.style.display = 'block';
+        error.style.display = 'block';
     }
 }
 
-// ページ読み込み時に認証済みかチェック
-window.onload = function() {
-    if (sessionStorage.getItem('isAuthenticated') === 'true') {
+// スクロール監視の初期化
+function initScrollObserver() {
+    const observerOptions = {
+        threshold: 0.3 // 30%見えたら発火
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach(slide => observer.observe(slide));
+}
+
+// ページ読み込み時の処理
+window.onload = () => {
+    // 既に認証済みの場合はゲートをスキップ
+    if (sessionStorage.getItem('is_authorized') === 'true') {
         document.getElementById('gate').style.display = 'none';
         document.getElementById('content').style.display = 'block';
-        document.getElementById('userDisplay').innerText = `Logged in: ${ALLOWED_EMAIL}`;
+        if (document.getElementById('userDisplay')) {
+            document.getElementById('userDisplay').innerText = `Authorized Access: ${ALLOWED_EMAIL}`;
+        }
+        initScrollObserver();
     }
 };
