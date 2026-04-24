@@ -1,5 +1,13 @@
 const ALLOWED_EMAIL = 'info@rikus.me';
 
+// 🌟 マウス追従ロジック
+document.addEventListener('mousemove', (e) => {
+    // マウスのX, Y座標を取得してCSS変数にセット
+    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+});
+
+// 認証チェック
 function checkAccess() {
     const input = document.getElementById('emailInput').value.toLowerCase();
     const gate = document.getElementById('gate');
@@ -11,34 +19,32 @@ function checkAccess() {
         setTimeout(() => {
             gate.style.display = 'none';
             content.style.display = 'block';
-            document.getElementById('userDisplay').innerText = `Authorized Session: ${input}`;
             sessionStorage.setItem('ta_auth_token', 'active');
             initObserver();
         }, 500);
     } else {
         error.style.display = 'block';
-        error.animate([{ transform: 'translateX(-10px)' }, { transform: 'translateX(10px)' }], { duration: 100, iterations: 3 });
     }
 }
 
+// アニメーション監視
 function initObserver() {
-    const options = { threshold: 0.2 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
-    }, options);
+    }, { threshold: 0.2 });
 
     document.querySelectorAll('.slide').forEach(slide => observer.observe(slide));
 }
 
+// 初期ロード処理
 window.onload = () => {
     if (sessionStorage.getItem('ta_auth_token') === 'active') {
         document.getElementById('gate').style.display = 'none';
         document.getElementById('content').style.display = 'block';
-        document.getElementById('userDisplay').innerText = `Authorized Session: ${ALLOWED_EMAIL}`;
         initObserver();
     }
 };
