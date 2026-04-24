@@ -2,50 +2,62 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Guide: ThinkingAI Proposals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div id="mouse-glow"></div>
+
     <div id="slideNav" class="slide-nav" style="display:none;">
         <button class="nav-btn" onclick="goToSlide(currentSlideIndex - 1)">▲</button>
         <button class="nav-btn" onclick="goToSlide(currentSlideIndex + 1)">▼</button>
     </div>
 
     <div id="gate">
-        <div class="card centered" style="max-width: 400px;">
+        <div class="card centered" style="max-width: 420px;">
             <div class="agent-tag">Authorization</div>
             <h2>Identity Verify</h2>
-            <input type="email" id="emailInput" placeholder="info@rikus.me" style="width:100%; padding:1rem; margin:1rem 0; border:1px solid #ddd; border-radius:8px;">
-            <button onclick="checkAccess()" style="width:100%; padding:1rem; background:var(--ta-grad); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">ENTER SYSTEM</button>
+            <p style="font-size: 0.9rem; color: #64748b;">関係者専用システムです。メールアドレスを入力してください。</p>
+            <div class="input-group">
+                <input type="email" id="emailInput" placeholder="info@rikus.me">
+                <button onclick="checkAccess()">ENTER SYSTEM</button>
+            </div>
+            <p id="errorMessage" class="error">アクセス権限がありません。</p>
         </div>
     </div>
 
     <main id="content" style="display:none;">
+        
         <section class="slide">
             <div class="slide-content centered">
                 <div class="reveal section-label">Design Standards v2.0</div>
                 <h1 class="reveal text-gradient">ThinkingAI<br>Proposal Framework</h1>
-                <p class="reveal">メッセージの構造化と、データによる比較。説得力を最大化するガイドライン。</p>
+                <p class="reveal">メッセージの構造化と、データによる比較。説得力を最大化する完全版ガイド。</p>
             </div>
         </section>
 
         <section class="slide">
             <div class="slide-content">
                 <div class="reveal section-label">01. Messaging Architecture</div>
+                
                 <div class="message-area reveal">
                     <div class="main-message">「主張」と「根拠」を明確に分離する</div>
                     <div class="sub-message">メインメッセージで結論を述べ、サブメッセージでその背景や数値を補足します。これがスライドの「背骨」となります。</div>
                 </div>
+                
                 <div class="grid-2 reveal">
                     <div class="card">
-                        <h3><code>.main-message</code></h3>
-                        <p>スライドの最上部に位置し、そのページで最も伝えたいことを24pt以上の太字で記述します。</p>
+                        <span class="agent-tag">.main-message</span>
+                        <h3>最上位のメッセージ</h3>
+                        <p>スライドの最上部に位置し、そのページで最も伝えたいことを太字で記述します。サブメッセージは一段落として補足します。</p>
                     </div>
                     <div class="code-block">
 <pre><code>&lt;div class="message-area"&gt;
-  &lt;div class="main-message"&gt;ここに結論&lt;/div&gt;
-  &lt;div class="sub-message"&gt;ここに補足説明&lt;/div&gt;
+  &lt;div class="main-message"&gt;ここに結論となる主張&lt;/div&gt;
+  &lt;div class="sub-message"&gt;ここに理由や背景の補足説明&lt;/div&gt;
 &lt;/div&gt;</code></pre>
                     </div>
                 </div>
@@ -55,29 +67,54 @@
         <section class="slide">
             <div class="slide-content">
                 <div class="reveal section-label">02. Comparison Table</div>
+                
                 <div class="message-area reveal">
                     <div class="main-message">定量的・定性的な比較を直感的に示す</div>
-                    <div class="sub-message">競合比較やBefore/Afterの提示には <code>.comp-table</code> クラスを使用します。ハイライト列で自社の優位性を強調できます。</div>
+                    <div class="sub-message">競合比較やBefore/Afterの提示にはテーブルを使用します。ハイライト列で自社の優位性を強調できます。</div>
                 </div>
+                
                 <div class="table-container reveal">
                     <table class="comp-table">
                         <thead>
-                            <tr><th>特徴</th><th>従来の手法</th><th class="highlight-col">ThinkingAI</th></tr>
+                            <tr>
+                                <th>機能要件</th>
+                                <th>従来の手法 (PDF/PPT)</th>
+                                <th class="highlight-col">ThinkingAI Framework</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr><td>更新性</td><td>静的（PDF/PPT）</td><td class="highlight-col">動的（Web/Real-time）</td></tr>
-                            <tr><td>セキュリティ</td><td>パスワード付きZIP</td><td class="highlight-col">Email 認証 / IP制限</td></tr>
-                            <tr><td>分析</td><td>不可</td><td class="highlight-col">読了率・滞在時間の可視化</td></tr>
+                            <tr>
+                                <td>情報鮮度</td>
+                                <td>静的（一度送ると更新不可）</td>
+                                <td class="highlight-col">動的（Web同期で常に最新）</td>
+                            </tr>
+                            <tr>
+                                <td>セキュリティ</td>
+                                <td>パスワード付きZIP・リンク共有</td>
+                                <td class="highlight-col">Email 認証 / IP制限 / 期限設定</td>
+                            </tr>
+                            <tr>
+                                <td>行動分析</td>
+                                <td>トラッキング不可</td>
+                                <td class="highlight-col">読了率・滞在時間のヒートマップ</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="code-block reveal" style="margin-top:2rem;">
+                
+                <div class="code-block reveal" style="margin-top: 1.5rem;">
 <pre><code>&lt;table class="comp-table"&gt;
   &lt;thead&gt;
-    &lt;tr&gt;&lt;th&gt;項目&lt;/th&gt;&lt;th class="highlight-col"&gt;自社&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;項目&lt;/th&gt;
+      &lt;th class="highlight-col"&gt;自社（強調したい列）&lt;/th&gt;
+    &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;特徴1&lt;/td&gt;&lt;td class="highlight-col"&gt;最高&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;特徴1&lt;/td&gt;
+      &lt;td class="highlight-col"&gt;最高レベルの体験&lt;/td&gt;
+    &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</code></pre>
                 </div>
@@ -86,24 +123,27 @@
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">03. Typography & Flow</div>
+                <div class="reveal section-label">03. Layout System</div>
+                
                 <div class="message-area reveal">
-                    <div class="main-message">情報の優先順位をデザインで制御する</div>
-                    <div class="sub-message">H2、H3、Pタグの適切な使い分けにより、読み手の視線誘導をスムーズに行います。</div>
+                    <div class="main-message">情報の粒度に合わせてグリッドを使い分ける</div>
+                    <div class="sub-message">細かい特徴を羅列する場合は3カラム、対比やコード例を示す場合は2カラムを採用します。</div>
                 </div>
-                <div class="grid-2 reveal">
+                
+                <div class="grid-3 reveal">
                     <div class="card">
-                        <h3>H2: セクションの問いかけ</h3>
-                        <p>読者の興味を引く具体的な問いや課題を配置します。</p>
-                        <h3 style="margin-top:1.5rem;">H3: 具体的な解決策</h3>
-                        <p>カード内などで使用し、具体的な手法を示します。</p>
+                        <span class="agent-tag">.grid-3</span>
+                        <h3>3カラム展開</h3>
+                        <p>メリットを3点提示するなど、情報の並列化に最適です。</p>
                     </div>
-                    <div class="code-block">
-<pre><code>&lt;h2&gt;セクションの問いかけ&lt;/h2&gt;
-&lt;div class="card"&gt;
-  &lt;h3&gt;解決策のタイトル&lt;/h3&gt;
-  &lt;p&gt;詳細説明...&lt;/p&gt;
-&lt;/div&gt;</code></pre>
+                    <div class="card">
+                        <span class="agent-tag">.card</span>
+                        <h3>カードUI</h3>
+                        <p>すりガラス効果により、背景のグリッドが透けて見えます。</p>
+                    </div>
+                    <div class="mockup-ui">
+                        <div style="font-size: 0.8rem; color: #64748b;">> .mockup-ui</div>
+                        <div class="ai-response" style="font-size: 0.9rem;">システムUIや、AIとの対話プロンプトを表現します。</div>
                     </div>
                 </div>
             </div>
@@ -113,8 +153,12 @@
             <div class="slide-content centered">
                 <h1 class="reveal text-gradient">Deliver Impact.</h1>
                 <p class="reveal">正しい構造と美しいデザインが、あなたの提案を「結果」に変えます。</p>
+                <div class="reveal" style="margin-top: 3rem;">
+                    <p style="font-size: 0.9rem; color: var(--ta-slate);">End of Document</p>
+                </div>
             </div>
         </section>
+
     </main>
 
     <script src="script.js"></script>
