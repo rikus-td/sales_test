@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprehensive Component Library</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Comprehensive Component Library - Light Grid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,12 +15,12 @@
         <div class="card centered" style="max-width: 400px; padding: 3rem;">
             <div class="agent-tag">Component Library</div>
             <h2>Dev Access</h2>
-            <p style="font-size: 0.9rem;">全コンポーネントの記述マニュアルです。</p>
+            <p class="text-dim">全コンポーネントの記述マニュアルです。</p>
             <div class="input-group">
                 <input type="email" id="emailInput" placeholder="info@rikus.me">
                 <button onclick="checkAccess()">マニュアルを展開</button>
             </div>
-            <p id="errorMessage" class="error" style="color: #ef4444; display: none; margin-top: 1rem;">Access Denied.</p>
+            <p id="errorMessage" class="error" style="color: #ef4444; display: none; margin-top: 1rem; font-size: 0.85rem; font-weight: bold;">Access Denied.</p>
         </div>
     </div>
 
@@ -30,7 +30,7 @@
             <div class="slide-content centered">
                 <div class="reveal section-label">Interactive Documentation</div>
                 <h1 class="reveal text-gradient">Proposals as Code<br>Component Library</h1>
-                <p class="reveal">マウスを動かしてみてください。光が追従します。<br>スクロールして各パーツのHTML記述方法を確認してください。</p>
+                <p class="reveal">マウスを動かしてみてください。淡い光が追従します。<br>スクロールして各パーツのHTML記述方法を確認してください。</p>
                 <div class="reveal" style="margin-top: 4rem;">
                     <p class="text-dim">Scroll down to explore ↓</p>
                 </div>
@@ -70,7 +70,7 @@
                     <div class="card">
                         <span class="agent-tag">.card</span>
                         <h3>グラスモーフィズム</h3>
-                        <p>背景が透ける美しいカードです。情報をまとめる際に多用します。</p>
+                        <p>背景が透ける美しいカードです。背後のグリッド線がぼやけて見えるのが特徴です。</p>
                     </div>
                     <div class="code-block" style="display: flex; align-items: center;">
 <pre><code>&lt;div class="grid-2"&gt;
@@ -116,7 +116,7 @@
                         <h3><code>.custom-list</code></h3>
                         <ul class="custom-list" style="margin-bottom: 2rem;">
                             <li>箇条書きの1つ目</li>
-                            <li>自動でアイコンが付きます</li>
+                            <li>自動で青いチェックが付きます</li>
                         </ul>
                         
                         <h3><code>.comp-table</code></h3>
@@ -154,7 +154,7 @@
                         <span class="agent-tag">.agent-tag</span>
                         <div class="mockup-ui">
                             <div class="text-dim">> .mockup-ui</div>
-                            <div class="ai-response">.ai-response<br>この枠は回答を表現します。</div>
+                            <div class="ai-response">.ai-response<br>クリーンな背景に青いラインで強調します。</div>
                         </div>
                     </div>
                     <div class="code-block">
