@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mega Guide: Proposals as Code Framework</title>
+    <title>Ultimate Guide: Proposals as Code Framework</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
@@ -58,8 +58,13 @@
         h3 { font-size: 1.4rem; font-weight: 700; color: var(--ta-blue); margin-bottom: 1rem; }
         p { font-size: 1.1rem; line-height: 1.8; color: var(--ta-slate); }
         .text-gradient { background: var(--ta-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .section-label { font-size: 0.75rem; font-weight: 900; letter-spacing: 0.4em; text-transform: uppercase; color: var(--ta-blue); margin-bottom: 2rem; border-left: 4px solid var(--ta-blue); padding-left: 1.5rem; }
-        .text-dim { font-size: 0.95rem; color: var(--ta-slate); }
+        
+        .section-label { 
+            display: inline-block;
+            font-size: 0.75rem; font-weight: 900; letter-spacing: 0.4em; text-transform: uppercase; 
+            color: var(--ta-blue); margin-bottom: 2rem; 
+            border-left: 4px solid var(--ta-blue); padding-left: 1.5rem; 
+        }
 
         /* 💎 メッセージライン */
         .message-area { margin-bottom: 3.5rem; border-bottom: 1px solid var(--ta-border); padding-bottom: 2rem; }
@@ -71,35 +76,51 @@
         .comp-table { width: 100%; border-collapse: collapse; }
         .comp-table th { background: #f8fafc; padding: 1.5rem; text-align: left; font-size: 0.8rem; color: var(--ta-slate); text-transform: uppercase; border-bottom: 2px solid var(--ta-border); }
         .comp-table td { padding: 1.5rem; border-bottom: 1px solid var(--ta-border); font-size: 1.05rem; color: var(--ta-navy); }
-        .comp-table tr:last-child td { border-bottom: none; }
         .comp-table .highlight-col { background: rgba(37, 99, 235, 0.03); font-weight: 700; color: var(--ta-blue); }
         
-        .custom-list { list-style: none; padding: 0; margin-top: 1rem; }
+        .custom-list { list-style: none; padding: 0; margin-top: 1rem; text-align: left; }
         .custom-list li { position: relative; padding-left: 1.8rem; margin-bottom: 0.8rem; color: var(--ta-navy); font-weight: 500; }
         .custom-list li::before { content: '✓'; position: absolute; left: 0; color: var(--ta-blue); font-weight: bold; }
 
         /* コンポーネント */
-        .card { background: rgba(255, 255, 255, 0.8); border: 1px solid var(--ta-border); border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        .card { background: rgba(255, 255, 255, 0.8); border: 1px solid var(--ta-border); border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(12px); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05); transition: all 0.3s ease; text-align: left; }
         .card:hover { transform: translateY(-5px); border-color: var(--ta-blue); box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.1); }
         
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .centered { text-align: center; align-items: center; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; text-align: left; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; text-align: left; }
+
+        /* 🛠️ 中央揃えの核心的修正（スクリーンショットの不具合対応） */
+        .centered { 
+            text-align: center !important; 
+            display: flex !important; 
+            flex-direction: column !important; 
+            align-items: center !important; 
+            justify-content: center !important; 
+        }
+        /* 子要素の幅制限があってもマージンオートで中央に固定 */
+        .centered > * { 
+            margin-left: auto !important; 
+            margin-right: auto !important; 
+            text-align: center !important;
+        }
+        /* 中央揃えの時はセクションラベルの線を消してバランスを整える */
+        .centered .section-label { 
+            border-left: none; 
+            padding-left: 0; 
+        }
 
         /* UIエレメント */
         .agent-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; background: rgba(37, 99, 235, 0.1); color: var(--ta-blue); padding: 0.4rem 1.2rem; border-radius: 50px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(37, 99, 235, 0.2); }
-        .mockup-ui { background: #f8fafc; border-radius: 16px; padding: 2rem; border: 1px solid #e2e8f0; margin-top: 1.5rem; }
+        .mockup-ui { background: #f8fafc; border-radius: 16px; padding: 2rem; border: 1px solid #e2e8f0; margin-top: 1.5rem; text-align: left; }
         .ai-response { border-left: 4px solid var(--ta-blue); padding-left: 1.5rem; margin-top: 1.5rem; color: var(--ta-navy); font-weight: 600; font-style: italic; }
-        .code-block { background: #0f172a; color: #e2e8f0; padding: 1.5rem; border-radius: 12px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; overflow-x: auto; margin-top: 1rem; line-height: 1.6; box-shadow: inset 0 2px 10px rgba(0,0,0,0.3); }
+        .code-block { background: #0f172a; color: #e2e8f0; padding: 1.5rem; border-radius: 12px; font-family: monospace; font-size: 0.85rem; overflow-x: auto; text-align: left; line-height: 1.6; }
 
         /* 🔐 認証ゲート */
-        #gate { position: fixed; inset: 0; background: var(--ta-bg); background-image: linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px); background-size: 50px 50px; display: flex; justify-content: center; align-items: center; z-index: 1000; transition: opacity 0.5s ease; }
-        .auth-card { background: white; border: 1px solid var(--ta-border); border-radius: 30px; padding: 4rem 3rem; max-width: 480px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.05); text-align: center; }
+        #gate { position: fixed; inset: 0; background: var(--ta-bg); display: flex; justify-content: center; align-items: center; z-index: 1000; transition: opacity 0.5s ease; }
+        .auth-card { background: white; border: 1px solid var(--ta-border); border-radius: 30px; padding: 4rem 3rem; max-width: 480px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.05); }
         .input-group { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
-        input { padding: 1.2rem; border-radius: 12px; border: 1px solid #cbd5e1; outline: none; font-size: 1rem; transition: 0.2s; }
-        input:focus { border-color: var(--ta-blue); }
-        .auth-btn { padding: 1.2rem; background: var(--ta-grad); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2); transition: 0.2s; }
-        .auth-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+        input { padding: 1.2rem; border-radius: 12px; border: 1px solid #cbd5e1; outline: none; font-size: 1rem; }
+        .auth-btn { padding: 1.2rem; background: var(--ta-grad); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; }
 
         /* 🧭 ナビゲーション */
         .slide-nav { position: fixed; right: 2rem; bottom: 2rem; display: flex; flex-direction: column; gap: 0.8rem; z-index: 100; }
@@ -109,10 +130,8 @@
         /* アニメーション */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
         .slide.visible .reveal { opacity: 1; transform: translateY(0); }
-        .reveal:nth-child(2) { transition-delay: 0.1s; }
-        .reveal:nth-child(3) { transition-delay: 0.2s; }
-        .reveal:nth-child(4) { transition-delay: 0.3s; }
-        .reveal:nth-child(5) { transition-delay: 0.4s; }
+        .reveal:nth-child(2) { transition-delay: 0.15s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
     </style>
 </head>
 <body>
@@ -121,9 +140,9 @@
 
     <div id="gate">
         <div class="auth-card">
-            <div class="agent-tag">ThinkingAI Security</div>
+            <div class="agent-tag">ThinkingAI Identity</div>
             <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Access Portal</h2>
-            <p style="color: var(--ta-slate); font-size: 0.95rem;"> <br>認証用アドレス（info@rikus.me）を入力してください。</p>
+            <p style="color: var(--ta-slate); font-size: 0.95rem;">メガガイド・全12セクションへアクセスします。<br>認証用アドレス（info@rikus.me）を入力してください。</p>
             <div class="input-group">
                 <input type="email" id="emailInput" placeholder="info@rikus.me">
                 <button class="auth-btn" onclick="checkAccess()">UNLOCK FULL GUIDE</button>
@@ -144,11 +163,11 @@
                 <div class="reveal section-label">Ultimate Master Guide v3.0</div>
                 <h1 class="reveal text-gradient" style="font-size: clamp(3rem, 8vw, 6rem);">Proposals as Code</h1>
                 <p class="reveal" style="font-size: 1.3rem; max-width: 800px; margin-top: 1rem;">
-                    プレゼン資料の概念を覆す、完全自動化・自律型Web提案システムの構築規範。
+                    プレゼン資料の概念を覆す、完全自動化・自律型Web提案システムの構築規範。<br>
                     全12セクションに及ぶコンポーネントとメッセージングの極意をここに。
                 </p>
                 <div class="reveal" style="margin-top: 5rem;">
-                    <p class="text-dim">Scroll down or use arrow keys ↓</p>
+                    <p style="color: var(--ta-slate); font-size: 0.9rem;">Scroll down or use arrow keys ↓</p>
                 </div>
             </div>
         </section>
@@ -498,7 +517,7 @@
                         currentSlideIndex = slides.indexOf(entry.target);
                     }
                 });
-            }, { threshold: 0.3 }); // 30%見えたらアニメーション発火
+            }, { threshold: 0.3 });
 
             slides.forEach(slide => observer.observe(slide));
             slides[0].classList.add('visible');
@@ -526,7 +545,7 @@
             }
         });
 
-        // リロード時
+        // ロード時
         window.onload = () => {
             if (sessionStorage.getItem('ta_mega_auth') === 'active') {
                 document.getElementById('gate').style.display = 'none';
