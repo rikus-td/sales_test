@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Proposal | Your Company</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="gate">
+        <div class="gate-container">
+            <h1>Exclusive Access</h1>
+            <p>本提案資料を閲覧するには、ご登録のメールアドレスを入力してください。</p>
+            <div class="input-group">
+                <input type="email" id="emailInput" placeholder="example@domain.com">
+                <button onclick="checkAccess()">閲覧を開始する</button>
+            </div>
+            <p id="errorMessage" class="error" style="display: none;">アクセス権限がありません。</p>
+        </div>
+    </div>
+
+    <main id="content" style="display: none;">
+        <header>
+            <nav>
+                <span class="logo">Digital Sales Room</span>
+                <span id="userDisplay"></span>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>次世代セールス基盤の構築に向けたご提案</h1>
+            <p>AIとWebテクノロジーを融合させた、新しい営業体験のプロトタイプ</p>
+        </section>
+
+        <section class="proposal-body">
+            <h2>01. 現状の課題</h2>
+            <p>従来のPDF資料では、顧客の行動が追えず、更新性にも欠けるという課題があります。</p>
+
+            <h2>02. 解決策</h2>
+            <p>HTML/CSS/JSベースの提案書により、以下の価値を提供します：</p>
+            <ul>
+                <li>リアルタイムな内容更新</li>
+                <li>詳細なアクセスログ解析</li>
+                <li>インタラクティブなシミュレーション機能</li>
+            </ul>
+
+            <div class="pricing-card">
+                <h3>Estimated ROI</h3>
+                <p class="price">250%<span> Increase</span></p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Your Company Inc. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
