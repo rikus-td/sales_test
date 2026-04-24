@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposal | 次世代セールスアーキテクチャ</title>
+    <title>UI Component Reference</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="gate" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-main); display: flex; justify-content: center; align-items: center; z-index: 1000;">
-        <div class="card" style="text-align: center; max-width: 400px; padding: 3rem; width: 90%;">
-            <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Restricted Access</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 2rem; color: var(--text-secondary);">本提案資料を閲覧するには、権限のあるメールアドレスを入力してください。</p>
-            <div style="display: flex; flex-direction: column; gap: 1rem;">
-                <input type="email" id="emailInput" placeholder="info@rikus.me" style="padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.5); color: white; outline: none;">
-                <button onclick="checkAccess()" style="padding: 1rem; background: var(--grad-primary); border: none; border-radius: 8px; color: #000; font-weight: bold; cursor: pointer; transition: opacity 0.2s;">認証して閲覧を開始</button>
+    <div id="gate">
+        <div class="card centered" style="max-width: 450px;">
+            <div class="agent-tag">System Access</div>
+            <h2>UI Reference</h2>
+            <p>コンポーネント・リファレンスへようこそ。<br>認証用メールアドレスを入力してください。</p>
+            <div class="input-group">
+                <input type="email" id="emailInput" placeholder="info@rikus.me">
+                <button onclick="checkAccess()">マニュアルを開く</button>
             </div>
-            <p id="errorMessage" style="color: #ef4444; margin-top: 1rem; display: none; font-size: 0.85rem;">アクセス権限がありません。</p>
+            <p id="errorMessage" class="error">アクセス権限がありません。</p>
         </div>
     </div>
 
@@ -24,86 +26,155 @@
 
         <section class="slide">
             <div class="slide-content centered">
-                <div class="reveal section-label">Confidential Proposal</div>
-                <h1 class="reveal text-gradient" style="font-size: clamp(2.5rem, 6vw, 5rem);">Proposals as Code</h1>
-                <p class="reveal" style="font-size: clamp(1.2rem, 2vw, 1.5rem); margin-top: 1rem;">Webテクノロジーが導く、次世代の「動的」セールス体験</p>
-                <div class="reveal" style="margin-top: 3rem; color: var(--text-secondary); font-size: 0.9rem;">
-                    <p id="userDisplay"></p> <p style="margin-top: 0.5rem;">2026.04.24 | Digital Sales Team</p>
+                <div class="reveal section-label">Design System v1.0</div>
+                <h1 class="reveal text-gradient">UI Component<br>Reference</h1>
+                <p class="reveal">HTML構築のためのクラス名・構造マニュアル</p>
+                <div class="reveal" style="margin-top: 2rem;">
+                    <p class="text-dim">Scroll to start</p>
                 </div>
             </div>
         </section>
 
         <section class="slide">
             <div class="slide-content">
-                <div class="reveal section-label">Current Challenges</div>
-                <h2 class="reveal">既存のPDF/PPT資料の限界</h2>
-                <div class="grid-3 reveal">
-                    <div class="card">
-                        <h3>情報のブラックボックス化</h3>
-                        <p>ファイルを送信した後、顧客が「どのページを」「何分見たか」をトラッキングできず、フォローアップのタイミングが完全に勘に依存しています。</p>
-                    </div>
-                    <div class="card">
-                        <h3>バージョンの乱立</h3>
-                        <p>「最新版_v3_最終.pdf」といったファイルがローカルに散乱し、誤って古い仕様や価格をお客様に送付してしまうリスクが常態化しています。</p>
-                    </div>
-                    <div class="card">
-                        <h3>静的で受動的な体験</h3>
-                        <p>顧客は資料をただ「読む」だけです。自社の数値を入力して効果を測るような、インタラクティブな商談体験を提供できていません。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <div class="slide-content">
-                <div class="reveal section-label">Core Solution</div>
-                <h2 class="reveal">AI × Git × Vercel による完全な自律化</h2>
-                
+                <div class="reveal section-label">01. Base Structure</div>
+                <h2 class="reveal">スライドの基本構造 (<code>.slide</code>)</h2>
                 <div class="grid-2 reveal">
                     <div>
-                        <span class="agent-tag">MCP Integration</span>
-                        <h3>会話から「専用Webページ」を即時生成</h3>
-                        <p>営業担当者はAIと対話するだけです。AIが過去の提案リポジトリ（MCP）を参照し、顧客に最適化されたHTMLを生成。Vercel経由で即座にセキュアなURLが発行されます。</p>
-                        
-                        <div class="mockup-ui">
-                            <div style="color: var(--text-secondary); font-size: 0.85rem;">> A社向けの次期インフラ刷新提案を作成して。</div>
-                            <div class="ai-response" style="font-size: 0.85rem;">
-                                承知しました。過去の同業他社の成功事例からロジックを抽出します。<br>
-                                ✅ HTML/JS 生成完了<br>
-                                ✅ Vercelへのデプロイ完了<br>
-                                🔗 <span style="color: var(--accent-cyan);">https://proposal.company.com/a-corp</span>
-                            </div>
-                        </div>
+                        <p>1つのページ（画面）は必ず <code>&lt;section class="slide"&gt;</code> で囲みます。その中にコンテンツ幅を制御する <code>.slide-content</code> を配置します。</p>
+                        <p style="margin-top: 1rem;">中央揃えにしたい場合は <code>.centered</code> クラスを併用します。</p>
                     </div>
-                    
-                    <div class="card">
-                        <span class="agent-tag" style="background: var(--accent-blue);">Zero Friction</span>
-                        <h3> Docs as Codeの実現</h3>
-                        <p style="margin-bottom: 1rem;">画像やロゴの配置も、指定のディレクトリを参照するだけ。手作業でのレイアウト調整は一切不要になります。</p>
-                        <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; margin-left: 1.2rem;">
-                            <li>アクセス権と有効期限のJS制御</li>
-                            <li>行動データのCRMへの自動連携</li>
-                            <li>一貫したコーポレートデザインの担保</li>
-                        </ul>
+                    <div class="code-block">
+<pre><code>&lt;!-- 基本のスライド --&gt;
+&lt;section class="slide"&gt;
+  &lt;div class="slide-content"&gt;
+    &lt;!-- ここに中身 --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- 中央揃えのスライド --&gt;
+&lt;section class="slide"&gt;
+  &lt;div class="slide-content centered"&gt;
+    &lt;!-- ここに中身 --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="slide">
-            <div class="slide-content centered">
-                <div class="reveal section-label">Business Impact</div>
-                <h2 class="reveal">導入による期待効果</h2>
-                <p class="reveal" style="max-width: 600px; text-align: center; margin-bottom: 3rem;">商談の準備時間を劇的に削減し、データドリブンなクロージングを実現します。</p>
-                
-                <div class="grid-2 reveal" style="width: 100%; max-width: 800px;">
-                    <div class="card centered" style="justify-content: center;">
-                        <p style="font-size: 1rem; color: var(--text-secondary); font-weight: bold; margin-bottom: 0.5rem;">資料作成時間</p>
-                        <div style="font-size: 4rem; font-weight: 900; line-height: 1; color: var(--accent-cyan);">-85<span style="font-size: 2rem;">%</span></div>
+            <div class="slide-content">
+                <div class="reveal section-label">02. Typography</div>
+                <h2 class="reveal">見出しとテキスト (<code>h1, h2, p</code>)</h2>
+                <div class="grid-2 reveal">
+                    <div>
+                        <div class="section-label" style="margin-bottom: 0.5rem;">.section-label</div>
+                        <h1 class="text-gradient">h1.text-gradient</h1>
+                        <h2>h2: 通常の見出し</h2>
+                        <h3>h3: 小見出し（自動でシアン色）</h3>
+                        <p>p: 通常の段落テキストです。文字色は自動で少し暗くなります。</p>
+                        <p class="text-dim">p.text-dim: 補足用のさらに暗いテキストです。</p>
                     </div>
-                    <div class="card centered" style="justify-content: center;">
-                        <p style="font-size: 1rem; color: var(--text-secondary); font-weight: bold; margin-bottom: 0.5rem;">成約率（トラッキング活用）</p>
-                        <div style="font-size: 4rem; font-weight: 900; line-height: 1; background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">+40<span style="font-size: 2rem;">%</span></div>
+                    <div class="code-block">
+<pre><code>&lt;div class="section-label"&gt;タグ&lt;/div&gt;
+&lt;h1 class="text-gradient"&gt;大見出し&lt;/h1&gt;
+&lt;h2&gt;セクション見出し&lt;/h2&gt;
+&lt;h3&gt;小見出し&lt;/h3&gt;
+&lt;p&gt;本文テキスト&lt;/p&gt;
+&lt;p class="text-dim"&gt;補足テキスト&lt;/p&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">03. Layout</div>
+                <h2 class="reveal">グリッドシステム (<code>.grid-2, .grid-3</code>)</h2>
+                
+                <h3 class="reveal">2カラム (<code>.grid-2</code>)</h3>
+                <div class="grid-2 reveal" style="margin-bottom: 2rem;">
+                    <div class="card" style="padding: 1rem; text-align: center;">Left Column</div>
+                    <div class="card" style="padding: 1rem; text-align: center;">Right Column</div>
+                </div>
+
+                <h3 class="reveal">3カラム (<code>.grid-3</code>)</h3>
+                <div class="grid-3 reveal">
+                    <div class="card" style="padding: 1rem; text-align: center;">Col 1</div>
+                    <div class="card" style="padding: 1rem; text-align: center;">Col 2</div>
+                    <div class="card" style="padding: 1rem; text-align: center;">Col 3</div>
+                </div>
+                
+                <div class="code-block reveal" style="margin-top: 1.5rem;">
+<pre><code>&lt;div class="grid-2"&gt;
+  &lt;div&gt;左&lt;/div&gt;
+  &lt;div&gt;右&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">04. Components</div>
+                <h2 class="reveal">カード (<code>.card</code>)</h2>
+                <div class="grid-2 reveal">
+                    <div class="card">
+                        <h3>基本のカード</h3>
+                        <p>情報をグループ化する際に使用します。背景のぼかし（backdrop-filter）とボーダーが自動で適用されます。</p>
+                    </div>
+                    <div class="code-block">
+<pre><code>&lt;div class="card"&gt;
+  &lt;h3&gt;タイトル&lt;/h3&gt;
+  &lt;p&gt;カードの説明文を記述します。&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">05. Components</div>
+                <h2 class="reveal">タグとモックアップUI</h2>
+                <div class="grid-2 reveal">
+                    <div>
+                        <span class="agent-tag">New Feature</span>
+                        <p style="margin-bottom: 1rem;"><code>.agent-tag</code> は強調したいラベルに使います。</p>
+                        
+                        <div class="mockup-ui">
+                            <div class="text-dim">> System Status</div>
+                            <div class="ai-response">All systems operational.</div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+<pre><code>&lt;!-- タグ --&gt;
+&lt;span class="agent-tag"&gt;タグ名&lt;/span&gt;
+
+&lt;!-- モックアップUI --&gt;
+&lt;div class="mockup-ui"&gt;
+  &lt;div class="text-dim"&gt;&gt; 入力&lt;/div&gt;
+  &lt;div class="ai-response"&gt;出力結果&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-content">
+                <div class="reveal section-label">06. Animation</div>
+                <h2 class="reveal">フェードイン (<code>.reveal</code>)</h2>
+                <div class="grid-2 reveal">
+                    <div>
+                        <p>スクロール時に要素をフワッと表示させたい場合は、任意のタグに <code>reveal</code> クラスを追加します。</p>
+                        <p>1つのスライド内で複数の <code>reveal</code> がある場合、自動的に遅延（ディレイ）がかかり、順番に表示されます。</p>
+                    </div>
+                    <div class="code-block">
+<pre><code>&lt;!-- H2が先に表示され、Pが遅れて表示される --&gt;
+&lt;h2 class="reveal"&gt;見出し&lt;/h2&gt;
+&lt;p class="reveal"&gt;本文&lt;/p&gt;</code></pre>
                     </div>
                 </div>
             </div>
@@ -112,21 +183,5 @@
     </main>
 
     <script src="script.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.3 });
-            
-            document.querySelectorAll('.slide').forEach(slide => {
-                observer.observe(slide);
-            });
-        });
-    </script>
 </body>
 </html>
